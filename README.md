@@ -1,7 +1,7 @@
 # moviez
   BWA Intern 2022
  
-#tools
+ # tools
  Flutter (3.3.0)
 
 ## Getting Started
