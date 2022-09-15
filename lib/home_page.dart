@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:moviez/search_page.dart';
 import 'package:moviez/shared/theme.dart';
 import 'package:moviez/widgets/disney_movie_card.dart';
 
+// ignore: use_key_in_widget_constructors
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -10,22 +12,56 @@ class HomePage extends StatelessWidget {
         margin: const EdgeInsets.only(left: 24),
         child: Row(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Moviez',
-                  style: avenirBlackTextStyle.copyWith(
-                    fontSize: 28,
-                    color: primaryColor,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Moviez',
+                    style: avenirBlackTextStyle.copyWith(
+                      fontSize: 28,
+                      color: primaryColor,
+                    ),
+                  ),
+                  Text(
+                    'Watch much easier',
+                    style: avenirBookTextStyle.copyWith(
+                        fontSize: 16, color: subtitleColor),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 45,
+              width: 55,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: whiteColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      bottomLeft: Radius.circular(
+                        25,
+                      ),
+                    ),
                   ),
                 ),
-                Text(
-                  'Watch much easier',
-                  style: avenirBookTextStyle.copyWith(
-                      fontSize: 16, color: subtitleColor),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SearchPage();
+                      },
+                    ),
+                  );
+                },
+                child: Image.asset(
+                  'assets/search_icon.png',
+                  height: 22,
+                  width: 22,
                 ),
-              ],
+              ),
             ),
           ],
         ),
@@ -131,6 +167,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+        width: double.infinity,
         padding: const EdgeInsets.only(
           top: 29,
         ),
