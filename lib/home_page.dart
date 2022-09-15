@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moviez/shared/theme.dart';
+import 'package:moviez/widgets/disney_movie_card.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -31,6 +32,103 @@ class HomePage extends StatelessWidget {
       );
     }
 
+    featuredMovie({
+      required String title,
+      required String genre,
+      required int star,
+      required String img,
+    }) {
+      return Padding(
+        padding: const EdgeInsets.only(
+          left: 24,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: 27,
+                  ),
+                  height: 200,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(21),
+                    image: DecorationImage(
+                      image: AssetImage('assets/$img'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 244,
+                  height: 7,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(11),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xff5E38E5).withOpacity(0.4),
+                        blurRadius: 10,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 300,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: avenirHeavyTextStyle.copyWith(
+                            color: primaryColor,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          genre,
+                          style: avenirBookTextStyle.copyWith(
+                            fontSize: 16,
+                            color: subtitleColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  for (int j = 0; j < 5 - star; j++)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 2,
+                      ),
+                      child: Image.asset(
+                        'assets/deactivate_star.png',
+                        width: 18,
+                      ),
+                    ),
+                  for (int i = 0; i < star; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 2,
+                      ),
+                      child: Image.asset(
+                        'assets/activate_star.png',
+                        width: 18,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(
@@ -49,6 +147,58 @@ class HomePage extends StatelessWidget {
         child: ListView(
           children: [
             header(),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  featuredMovie(
+                    title: 'John Wick 4',
+                    genre: 'Action, Crime',
+                    img: 'movie1.png',
+                    star: 5,
+                  ),
+                  featuredMovie(
+                    title: 'Bohemian',
+                    genre: 'Documentary',
+                    img: 'movie2.png',
+                    star: 3,
+                  ),
+                  const SizedBox(
+                    width: 24,
+                  ),
+                ],
+              ),
+            ),
+            // NOTE: From Disney Title
+            Container(
+              margin: const EdgeInsets.only(
+                left: 24,
+                top: 27,
+              ),
+              child: Text(
+                'From Disney',
+                style: avenirBlackTextStyle.copyWith(
+                  color: primaryColor,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            // NOTE: Disney Content
+            DisneyMovieCard(
+              image: 'movie3.png',
+              title: 'Mulan Session',
+              genre: 'History, War',
+              star: 3,
+            ),
+            DisneyMovieCard(
+              image: 'movie4.png',
+              title: 'Beauty & Beast',
+              genre: 'Sci-Fiction',
+              star: 5,
+            ),
+            const SizedBox(
+              height: 43,
+            ),
           ],
         ),
       ),
