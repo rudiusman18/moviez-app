@@ -2,7 +2,7 @@
   BWA Intern 2022
  
  # tools
- Flutter (3.3.0)
+ Flutter (3.3.2)
 
 ## Getting Started
 
